@@ -1,0 +1,19 @@
+{
+  "identificacao": {
+    "razao_social": "",
+    "cnpj": "",
+    "atividade": "",
+    "endereco": {
+      "logradouro": "",
+      "numero": "",
+      "bairro": "",
+      "municipio": "",
+      "uf": "",
+      "cep": ""
+    },
+    "situacao": {
+      "em_atividade": false,
+      "ano": ""
+    }
+  }
+}
