@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Memorial Descritivo – Projeto de Incêndio</title>
+
+<!-- ====== CSS (FORMULÁRIO + DOCUMENTO OFICIAL) ====== -->
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6fb;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.box {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+input, select {
+  width: 100%;
+  padding: 6px;
+  font-size: 13px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn {
+  background: #2b59ff;
+  color: #fff;
+}
+
+.btn-sec {
+  background: #e9ecff;
+  color: #2b59ff;
+}
+
+.error {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffecec;
+  border: 1px solid #ffb3b3;
+  color: #900;
+  display: none;
+}
+
+/* ====== DOCUMENTO A4 ====== */
+#pagina-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  padding: 15mm;
+  font-size: 12px;
+  color: #000;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #e6e6e6;
+  border: 1px solid #000;
+  padding: 6px;
+  font-weight: bold;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+.rotulo {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.valor {
+  color: #0033cc;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Memorial Descritivo – Identificação da Edificação</h1>
+
+<div class="container">
+
+<!-- ====== FORMULÁRIO ====== -->
+<div class="box">
+<h3>Dados do Projeto</h3>
+
+<label>Razão Social
+<input id="razao_social"></label>
+
+<label>CNPJ
+<input id="cnpj" placeholder="00.000.000/0000-00"></label>
+
+<label>Observação / Nome Fantasia
+<input id="obs"></label>
+
+<label>Atividade Econômica
+<input id="atividade"></label>
+
+<label>Logradouro
+<input id="logradouro"></label>
+
+<label>Número
+<input id="numero"></label>
+
+<label>Bairro
+<input id="bairro"></label>
+
+<label>Município
+<input id="municipio"></label>
+
+<label>UF
+<input id="uf" maxlength="2"></label>
+
+<label>CEP
+<input id="cep"></label>
+
+<label>Estabelecimento em atividade?
+<select id="em_atividade">
+  <option value="false">Não</option>
+  <option value="true">Sim</option>
+</select></label>
+
+<label>Ano previsto de início
+<input id="ano" type="number"></label>
+
+<button class="btn" onclick="gerarPDF()">Gerar PDF Oficial</button>
+
+<div id="erros" class="error"></div>
+</div>
+
+<!-- ====== DOCUMENTO ====== -->
+<div class="box">
+<div id="pagina-a4">
+  <div class="titulo">MEMORIAL DESCRITIVO</div>
+
+  <table>
+    <tr><th colspan="6">1. IDENTIFICAÇÃO DA EDIFICAÇÃO</th></tr>
+
+    <tr>
+      <td class="rotulo">1.1</td>
+      <td class="rotulo">Razão Social:</td>
+      <td class="valor" colspan="2" id="pdf_razao"></td>
+      <td class="rotulo">CNPJ:</td>
+      <td class="valor" id="pdf_cnpj"></td>
+    </tr>
+
+    <tr>
+      <td class="rotulo">1.2</td>
+      <td class="rotulo">Nome Fantasia:</td>
+      <td class="valor" colspan="4" id="pdf_obs"></td>
+    </tr>
+
+    <tr>
+      <td class="rotulo">1.3</td>
+      <td class="rotulo">Atividade Econômica:</td>
+      <td class="valor" colspan="4" id="pdf_atividade"></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td class="rotulo">Endereço:</td>
+      <td class="valor" colspan="4" id="pdf_endereco"></td>
+    </tr>
+
+    <tr>
+      <td class="rotulo">1.6</td>
+      <td class="rotulo">Estabelecimento em atividade?</td>
+      <td class="valor" colspan="2" id="pdf_status"></td>
+      <td class="rotulo">Ano:</td>
+      <td class="valor" id="pdf_ano"></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+</div>
+
+<!-- ====== BIBLIOTECAS PDF ====== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- ====== JAVASCRIPT ====== -->
+<script>
+function validar() {
+  const erros = [];
+  const emAtividade = document.getElementById("em_atividade").value === "true";
+  const cnpj = document.getElementById("cnpj").value.trim();
+  const obs = document.getElementById("obs").value.toLowerCase();
+
+  if (emAtividade && !cnpj) erros.push("CNPJ obrigatório se estiver em atividade.");
+  if (emAtividade && obs.includes("constru")) erros.push("Inconsistência: atividade marcada como SIM e observação indica construção.");
+
+  return erros;
+}
+
+function preencherDocumento() {
+  document.getElementById("pdf_razao").innerText = razao_social.value;
+  document.getElementById("pdf_cnpj").innerText = cnpj.value || "—";
+  document.getElementById("pdf_obs").innerText = obs.value || "—";
+  document.getElementById("pdf_atividade").innerText = atividade.value;
+  document.getElementById("pdf_endereco").innerText =
+    `${logradouro.value}, nº ${numero.value}, ${bairro.value}, ${municipio.value}/${uf.value} – CEP ${cep.value}`;
+  document.getElementById("pdf_status").innerText =
+    em_atividade.value === "true" ? "SIM" : "NÃO";
+  document.getElementById("pdf_ano").innerText = ano.value || "—";
+}
+
+async function gerarPDF() {
+  const erros = validar();
+  const box = document.getElementById("erros");
+
+  if (erros.length) {
+    box.style.display = "block";
+    box.innerHTML = erros.join("<br>");
+    return;
+  }
+  box.style.display = "none";
+
+  preencherDocumento();
+
+  const { jsPDF } = window.jspdf;
+  const canvas = await html2canvas(document.getElementById("pagina-a4"), { scale: 2 });
+  const img = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF("p", "mm", "a4");
+  pdf.addImage(img, "PNG", 0, 0, 210, 297);
+  pdf.save("memorial-descritivo.pdf");
+}
+</script>
+
+</body>
+</html>
