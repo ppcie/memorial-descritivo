@@ -5,6 +5,7 @@
   <!-- Responsivo nativo: faz o layout se adaptar ao celular -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Memorial Descritivo Geral</title>
+  <link rel="stylesheet" href="../css/base.css">
 </head>
 
 <body>
@@ -28,237 +29,365 @@
            1. IDENTIFICAÇÃO DA EDIFICAÇÃO
            ========================= -->
       <fieldset>
-        <legend><strong>1. Identificação da edificação</strong></legend>
+  <legend><strong>1. Identificação da edificação</strong></legend>
 
-        <p>
-          <label for="razao_social"><strong>1.1 Razão Social</strong></label><br />
-          <input id="razao_social" name="razao_social" type="text" required
-                 placeholder="Ex.: INCORPORADORA RIBEIRO ALVES LTDA ME" />
-        </p>
+  <!-- =========================================
+       1.1 Razão Social / CNPJ (mesma linha)
+       - Em telas grandes: 2 colunas (2fr / 1fr)
+       - Em celular: vira 1 coluna automaticamente
+       ========================================= -->
+  <div class="form-row grid-2">
 
-        <p>
-          <strong>1.1 CNPJ</strong><br />
+    <div class="form-field">
+      <label for="razao_social">Razão Social</label>
+      <input id="razao_social" name="razao_social" type="text" required
+             placeholder="Ex.: INCORPORADORA RIBEIRO ALVES LTDA ME" />
+    </div>
 
-          <!--
-            Regra do seu exemplo:
-            - se estiver "em construção" e sem CNPJ, você marca a opção abaixo e não preenche CNPJ.
-            - sem JS ainda: vamos depender da lógica do usuário + validação simples.
-            Depois a gente automatiza isso via JS (CNPJ obrigatório quando NÃO estiver em construção).
-          -->
-          <label>
-            <input type="checkbox" id="sem_cnpj" name="sem_cnpj" />
-            Estabelecimento “em construção” / sem CNPJ
-          </label><br /><br />
+    <div class="form-field">
+      <label for="cnpj">CNPJ</label>
 
-          <label for="cnpj">CNPJ (somente números ou formatado)</label><br />
-          <input id="cnpj" name="cnpj" type="text"
-                 inputmode="numeric"
-                 placeholder="00.000.000/0001-00"
-                 pattern="(\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2})|(\d{14})" />
-          <small>Formato aceito: 00.000.000/0001-00 ou 14 dígitos.</small>
-        </p>
+      <!--
+        LÓGICA (sem JS por enquanto):
+        - Se marcar “sem CNPJ”, o usuário deixa o campo CNPJ vazio.
+        - Depois adicionaremos JS para tornar isso automático.
+      -->
 
-        <p>
-          <label for="nome_fantasia"><strong>1.2 Nome Fantasia</strong></label><br />
-          <input id="nome_fantasia" name="nome_fantasia" type="text"
-                 placeholder="Ex.: Loja XPTO (ou OBS...)" />
-        </p>
+      <input id="cnpj" name="cnpj" type="text"
+             inputmode="numeric"
+             placeholder="00.000.000/0001-00"
+             pattern="(\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2})|(\d{14})" />
 
-        <p>
-          <label for="atividade"><strong>1.3 Atividade Econômica</strong></label><br />
-          <input id="atividade" name="atividade" type="text" required
-                 placeholder="Ex.: Comercial varejista (produtos têxteis)" />
-        </p>
+    </div>
 
-        <p>
-          <label for="cnae"><strong>1.3 CNAE</strong></label><br />
-          <input id="cnae" name="cnae" type="text"
-                 placeholder="Ex.: 4781-4/00 (opcional)" />
-        </p>
+  </div>
 
-        <p>
-          <label for="endereco"><strong>Endereço</strong></label><br />
-          <input id="endereco" name="endereco" type="text" required
-                 placeholder="Rua/Av, logradouro" />
-        </p>
+  <!-- =========================================
+       1.2 Nome Fantasia (1 campo "linha cheia")
+       Ocupa a mesma largura total da linha 1.1
+       ========================================= -->
+  <div class="form-row grid-1">
+    <div class="form-field">
+      <label for="nome_fantasia">Nome Fantasia (opcional)</label>
+      <input id="nome_fantasia" name="nome_fantasia" type="text"
+             placeholder="Ex.: Loja XPTO (ou OBS...)" />
+    </div>
+  </div>
 
-        <p>
-          <label for="numero"><strong>Nº</strong></label><br />
-          <input id="numero" name="numero" type="text" required
-                 placeholder="Ex.: 331" />
-        </p>
+  <!-- =========================================
+       1.3 Atividade Econômica / CNAE (2 campos)
+       ========================================= -->
+  <div class="form-row grid-2">
 
-        <p>
-          <label for="complemento"><strong>1.4 Complemento</strong></label><br />
-          <input id="complemento" name="complemento" type="text"
-                 placeholder="Apto, sala, lote, etc. (se houver)" />
-        </p>
+    <div class="form-field">
+      <label for="atividade">Atividade Econômica</label>
+      <input id="atividade" name="atividade" type="text" required
+             placeholder="Ex.: Comercial varejista (produtos têxteis)" />
+    </div>
 
-        <p>
-          <label for="cep"><strong>CEP</strong></label><br />
-          <input id="cep" name="cep" type="text" inputmode="numeric"
-                 placeholder="68660-000"
-                 pattern="(\d{5}\-\d{3})|(\d{8})" />
-        </p>
+    <div class="form-field">
+      <label for="cnae">CNAE</label>
+      <input id="cnae" name="cnae" type="text"
+             placeholder="Ex.: 4781-4/00 (opcional)" />
+    </div>
 
-        <p>
-          <label for="bairro"><strong>Bairro</strong></label><br />
-          <input id="bairro" name="bairro" type="text" required placeholder="Ex.: Centro" />
-        </p>
+  </div>
 
-        <p>
-          <label for="municipio"><strong>Município</strong></label><br />
-          <input id="municipio" name="municipio" type="text" required placeholder="Ex.: São Miguel do Guamá - PA" />
-        </p>
+  <!-- =========================================
+       1.4 Endereço / Nº (2 campos)
+       ========================================= -->
+  <div class="form-row grid-2">
 
-        <p>
-          <label for="email"><strong>1.5 E-mail</strong></label><br />
-          <input id="email" name="email" type="email" placeholder="exemplo@dominio.com" />
-        </p>
+    <div class="form-field">
+      <label for="endereco">Endereço</label>
+      <input id="endereco" name="endereco" type="text" required
+             placeholder="Rua/Av, logradouro" />
+    </div>
 
-        <p>
-          <label for="fone"><strong>Fone</strong></label><br />
-          <input id="fone" name="fone" type="tel" inputmode="tel" placeholder="(91) 0000-0000" />
-        </p>
+    <div class="form-field">
+      <label for="numero">Nº</label>
+      <input id="numero" name="numero" type="text" required
+             placeholder="Ex.: 331" />
+    </div>
 
-        <p>
-          <label for="cel"><strong>Cel</strong></label><br />
-          <input id="cel" name="cel" type="tel" inputmode="tel" placeholder="(91) 90000-0000" />
-        </p>
+  </div>
 
-        <fieldset>
-          <legend><strong>1.6 Estabelecimento em atividade?</strong></legend>
+  <!-- =========================================
+       1.4 Complemento (1 campo linha cheia)
+       ========================================= -->
+  <div class="form-row grid-1">
+    <div class="form-field">
+      <label for="complemento">Complemento</label>
+      <input id="complemento" name="complemento" type="text"
+             placeholder="Apto, sala, lote, etc. (se houver)" />
+    </div>
+  </div>
 
-          <label>
-            <input type="radio" name="em_atividade" value="sim" required />
-            Sim
-          </label><br />
+  <!-- =========================================
+       1.4 CEP / Bairro / Município (3 campos)
+       ========================================= -->
+  <div class="form-row grid-3">
 
-          <label>
-            <input type="radio" name="em_atividade" value="nao" />
-            Não
-          </label><br /><br />
+    <div class="form-field">
+      <label for="cep">CEP</label>
+      <input id="cep" name="cep" type="text" inputmode="numeric"
+             placeholder="68660-000"
+             pattern="(\d{5}\-\d{3})|(\d{8})" />
+    </div>
 
-          <label for="data_inicio">
-            Data estimada para iniciar atividade (se “Não”)
-          </label><br />
-          <input id="data_inicio" name="data_inicio" type="text" placeholder="Ex.: 2026" />
-        </fieldset>
+    <div class="form-field">
+      <label for="bairro">Bairro</label>
+      <input id="bairro" name="bairro" type="text" required placeholder="Ex.: Centro" />
+    </div>
 
-      </fieldset>
+    <div class="form-field">
+      <label for="municipio">Município</label>
+      <input id="municipio" name="municipio" type="text" required
+             placeholder="Ex.: São Miguel do Guamá - PA" />
+    </div>
 
-      <!-- =========================
-           2. IDENTIFICAÇÃO DO PROPRIETÁRIO / RESPONSÁVEL LEGAL
-           ========================= -->
-      <fieldset>
-        <legend><strong>2. Identificação do proprietário ou responsável legal pelo uso</strong></legend>
+  </div>
 
-        <p>
-          <label for="prop_nome"><strong>2.1 Nome Completo</strong></label><br />
-          <input id="prop_nome" name="prop_nome" type="text" required />
-        </p>
+  <!-- =========================================
+       1.5 E-mail / Fone / Celular (3 campos)
+       ========================================= -->
+  <div class="form-row grid-3">
 
-        <p>
-          <label for="prop_rg"><strong>RG</strong></label><br />
-          <input id="prop_rg" name="prop_rg" type="text" />
-        </p>
+    <div class="form-field">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" placeholder="exemplo@dominio.com" />
+    </div>
 
-        <p>
-          <label for="prop_email"><strong>2.2 E-mail</strong></label><br />
-          <input id="prop_email" name="prop_email" type="email" />
-        </p>
+    <div class="form-field">
+      <label for="fone">Telefone</label>
+      <input id="fone" name="fone" type="tel" inputmode="tel" placeholder="(91) 0000-0000" />
+    </div>
 
-        <p>
-          <label for="prop_fone"><strong>Fone</strong></label><br />
-          <input id="prop_fone" name="prop_fone" type="tel" />
-        </p>
+    <div class="form-field">
+      <label for="cel">Celular</label>
+      <input id="cel" name="cel" type="tel" inputmode="tel" placeholder="(91) 90000-0000" />
+    </div>
 
-        <p>
-          <label for="prop_cel"><strong>Cel</strong></label><br />
-          <input id="prop_cel" name="prop_cel" type="tel" />
-        </p>
-      </fieldset>
+  </div>
 
-      <!-- =========================
-           3. IDENTIFICAÇÃO DO RESPONSÁVEL TÉCNICO
-           ========================= -->
-      <fieldset>
-        <legend><strong>3. Identificação do responsável técnico deste memorial</strong></legend>
+  <!-- =====================================================
+       ✅ DAQUI PRA BAIXO VOCÊ CONTINUA O RESTANTE DO FORMULÁRIO
+       Use o mesmo padrão:
+       - 2 campos na linha:   <div class="form-row grid-2"> ... </div>
+       - 3 campos na linha:   <div class="form-row grid-3"> ... </div>
+       - 1 campo linha cheia: <div class="form-row grid-1"> ... </div>
+       ===================================================== -->
 
-        <p>
-          <label for="rt_nome"><strong>3.1 Nome Completo</strong></label><br />
-          <input id="rt_nome" name="rt_nome" type="text" required />
-        </p>
+</fieldset>
 
-        <p>
-          <label for="rt_registro"><strong>Registro CREA/CAU</strong></label><br />
-          <input id="rt_registro" name="rt_registro" type="text" required placeholder="Ex.: CREA-PA 0000000000" />
-        </p>
 
-        <p>
-          <label for="rt_email"><strong>3.3 E-mail</strong></label><br />
-          <input id="rt_email" name="rt_email" type="email" />
-        </p>
+<!-- =====================================================
+     2. IDENTIFICAÇÃO DO PROPRIETÁRIO / RESPONSÁVEL LEGAL
+     Padrão responsivo:
+     - grid-2: 2 campos na mesma linha (desktop)
+     - grid-3: 3 campos na mesma linha (desktop)
+     - em celular tudo vira 1 coluna automaticamente
+     ===================================================== -->
+<fieldset>
+  <legend><strong>2. Identificação do proprietário ou responsável legal pelo uso</strong></legend>
 
-        <p>
-          <label for="rt_fone"><strong>Fone</strong></label><br />
-          <input id="rt_fone" name="rt_fone" type="tel" />
-        </p>
+  <!-- 2.1 Nome Completo / RG (mesma linha) -->
+  <div class="form-row grid-2">
+    <div class="form-field">
+      <label for="prop_nome">Nome Completo</label>
+      <input id="prop_nome" name="prop_nome" type="text" required
+             placeholder="Nome do proprietário ou responsável legal" />
+    </div>
 
-        <p>
-          <label for="rt_cel"><strong>Cel</strong></label><br />
-          <input id="rt_cel" name="rt_cel" type="tel" />
-        </p>
-      </fieldset>
+    <div class="form-field">
+      <label for="prop_rg">RG</label>
+      <input id="prop_rg" name="prop_rg" type="text"
+             placeholder="RG (opcional)" />
+    </div>
+  </div>
 
-      <!-- =========================
-           4. TIPO DE SERVIÇO
-           ========================= -->
-      <fieldset>
-        <legend><strong>4. Tipo de serviço</strong></legend>
+  <!-- 2.2 E-mail / Fone / Celular (3 campos, mesma largura do bloco) -->
+  <div class="form-row grid-3">
+    <div class="form-field">
+      <label for="prop_email">E-mail</label>
+      <input id="prop_email" name="prop_email" type="email"
+             placeholder="exemplo@dominio.com" />
+    </div>
 
-        <p>
-          <label>
-            <input type="checkbox" name="servico" value="analise_projeto_tecnico" />
-            Análise de Projeto Técnico
-          </label>
-        </p>
+    <div class="form-field">
+      <label for="prop_fone">Telefone</label>
+      <input id="prop_fone" name="prop_fone" type="tel" inputmode="tel"
+             placeholder="(91) 0000-0000" />
+    </div>
 
-        <p>
-          <label>
-            <input type="checkbox" name="servico" value="analise_temporaria" />
-            Análise de Projeto Técnico para Instalação e Ocupação Temporária
-          </label>
-        </p>
+    <div class="form-field">
+      <label for="prop_cel">Celular</label>
+      <input id="prop_cel" name="prop_cel" type="tel" inputmode="tel"
+             placeholder="(91) 90000-0000" />
+    </div>
+  </div>
 
-        <p>
-          <label>
-            <input type="checkbox" name="servico" value="ampliacao" />
-            Ampliação de área (m²)
-          </label><br />
-          <input type="number" name="ampliacao_area" min="0" step="0.01" placeholder="0,00" />
-        </p>
+  <!-- =====================================================
+       DAQUI PRA BAIXO (se você quiser continuar na seção 2)
+       Ex.: CPF, endereço do proprietário, etc.
+       Use grid-1 / grid-2 / grid-3 conforme a necessidade.
+       ===================================================== -->
+</fieldset>
 
-        <p>
-          <label>
-            <input type="checkbox" name="servico" value="modificacao" />
-            Modificação/Substituição de projeto
-          </label>
-        </p>
 
-        <details>
-          <summary><strong>Observações (documentos/condições)</strong></summary>
-          <p>
-            Anexar documento explicando as alterações e o protocolo da aprovação anterior (quando aplicável).
-          </p>
-          <p>
-            Área anteriormente aprovada (m²): <input type="number" name="area_anterior" min="0" step="0.01" />
-          </p>
-          <p>
-            Área total (m²) (ampliada + anterior): <input type="number" name="area_total_servico" min="0" step="0.01" />
-          </p>
-        </details>
-      </fieldset>
+<!-- =====================================================
+     3. IDENTIFICAÇÃO DO RESPONSÁVEL TÉCNICO
+     Objetivo: manter proporções parecidas com o bloco 2
+     ===================================================== -->
+<fieldset>
+  <legend><strong>3. Identificação do responsável técnico deste memorial</strong></legend>
+
+  <!-- 3.1 Nome Completo / Registro CREA-CAU (mesma linha) -->
+  <div class="form-row grid-2">
+    <div class="form-field">
+      <label for="rt_nome">Nome Completo</label>
+      <input id="rt_nome" name="rt_nome" type="text" required
+             placeholder="Nome do responsável técnico" />
+    </div>
+
+    <div class="form-field">
+      <label for="rt_registro">Registro CREA/CAU</label>
+      <input id="rt_registro" name="rt_registro" type="text" required
+             placeholder="Ex.: CREA-PA 0000000000 / CAU A000000-0" />
+    </div>
+  </div>
+
+  <!-- 3.3 E-mail / Fone / Celular (3 campos) -->
+  <div class="form-row grid-3">
+    <div class="form-field">
+      <label for="rt_email">E-mail</label>
+      <input id="rt_email" name="rt_email" type="email"
+             placeholder="exemplo@dominio.com" />
+    </div>
+
+    <div class="form-field">
+      <label for="rt_fone">Telfone</label>
+      <input id="rt_fone" name="rt_fone" type="tel" inputmode="tel"
+             placeholder="(91) 0000-0000" />
+    </div>
+
+    <div class="form-field">
+      <label for="rt_cel">Celular</label>
+      <input id="rt_cel" name="rt_cel" type="tel" inputmode="tel"
+             placeholder="(91) 90000-0000" />
+    </div>
+  </div>
+
+  <!-- =====================================================
+       DAQUI PRA BAIXO (se você quiser continuar na seção 3)
+       Ex.: ART/RRT, endereço profissional, etc.
+       Use grid-1 / grid-2 / grid-3 conforme a necessidade.
+       ===================================================== -->
+</fieldset>
+
+
+<!-- =====================================================
+     4. TIPO DE SERVIÇO  (versão “grade” tipo oficial)
+     - CSS isolado: não interfere nos labels do formulário geral
+     ===================================================== -->
+<fieldset class="md-servico">
+  <legend><strong>4. Tipo de serviço</strong></legend>
+
+  <div class="md-servico__grid">
+
+    <!-- 4.1 Duas opções principais (lado a lado no desktop) -->
+    <div class="md-servico__opcoes">
+
+      <label class="md-servico__chkline">
+        <input type="checkbox" name="tipo_servico" value="analise_projeto" />
+        <span class="md-servico__txt">Análise de Projeto Técnico</span>
+      </label>
+
+      <label class="md-servico__chkline">
+        <input type="checkbox" name="tipo_servico" value="analise_temporaria" />
+        <span class="md-servico__txt">Análise de Projeto Técnico para Instalação e Ocupação Temporária</span>
+      </label>
+
+    </div>
+
+    <!-- 4.2 Ampliação de área: alinhado com o label "Área ampliada" -->
+    <div class="md-servico__ampliacao">
+
+      <!-- ESQUERDA: spacer + checkbox+texto -->
+      <div class="md-servico__ampl-left">
+        <!-- spacer invisível para alinhar com o label da direita -->
+        <span class="md-servico__label-spacer" aria-hidden="true">.</span>
+
+        <label class="md-servico__chkline">
+          <input type="checkbox" name="tipo_servico" value="ampliacao_area" />
+          <span class="md-servico__txt">Ampliação de área (m²)</span>
+        </label>
+      </div>
+
+      <!-- DIREITA: label + input (padrão do formulário) -->
+      <div class="form-field">
+        <label for="area_ampliacao">Área ampliada (m²)</label>
+        <input id="area_ampliacao" name="area_ampliacao"
+               type="number" min="0" step="0.01" placeholder="0,00" />
+      </div>
+
+    </div>
+
+    <!-- 4.3 Modificação/Substituição -->
+    <label class="md-servico__chkline">
+      <input type="checkbox" name="tipo_servico" value="modificacao_projeto" />
+      <span class="md-servico__txt">Modificação / Substituição de projeto</span>
+    </label>
+
+    <!-- 4.4 Informações complementares -->
+    <fieldset class="md-servico__box-comp">
+      <legend><strong>Informações complementares (quando aplicável)</strong></legend>
+
+      <div class="md-servico__comp-areas">
+
+        <div class="form-field">
+          <label for="area_anterior">Área anteriormente aprovada (m²)</label>
+          <input id="area_anterior" name="area_anterior" type="number" min="0" step="0.01" />
+        </div>
+
+        <div class="form-field">
+          <label for="area_ampliada_total">Área ampliada (m²)</label>
+          <input id="area_ampliada_total" name="area_ampliada_total" type="number" min="0" step="0.01" />
+        </div>
+
+        <div class="form-field">
+          <label for="area_total_servico">Área total (m²)</label>
+          <input id="area_total_servico" name="area_total_servico" type="number" min="0" step="0.01" />
+        </div>
+
+      </div>
+
+      <div class="form-row grid-1">
+        <div class="form-field">
+          <label for="obs_servico">Observações / Documento explicativo (protocolo anterior)</label>
+          <textarea id="obs_servico" name="obs_servico" rows="3"
+                    placeholder="Anexar documento explicando as alterações e o protocolo da aprovação anterior."></textarea>
+        </div>
+      </div>
+
+    </fieldset>
+
+  </div>
+</fieldset>
+
+
+
+
+
+  <!-- =====================================================
+       DAQUI PRA BAIXO (continuação futura)
+       - Aqui entram regras condicionais em JS:
+         * só liberar campos se checkbox estiver marcado
+       - Aqui também entra validação cruzada com JSON
+       ===================================================== -->
+
+</fieldset>
+
 
       <!-- =========================
            5. CARACTERÍSTICAS DA EDIFICAÇÃO (começo)
