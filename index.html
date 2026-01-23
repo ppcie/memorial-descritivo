@@ -2,119 +2,173 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Memorial Descritivo</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <!--
+    Título da página (aparece na aba do navegador)
+  -->
+  <title>Memoriais Técnicos – Projeto de Incêndio</title>
 
-  <!-- Bibliotecas PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!--
+    CSS simples só para o menu
+    (não é o CSS dos memoriais)
+  -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f2f2f2;
+    }
+
+    /* Container central */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    /* Título principal */
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Subtítulo */
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    /* Lista de memoriais */
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Botão/link de cada memorial */
+    .menu a {
+      display: block;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      background: #fafafa;
+      transition: all 0.2s ease;
+    }
+
+    /* Efeito ao passar o mouse */
+    .menu a:hover {
+      background: #e9f0ff;
+      border-color: #2b59ff;
+      color: #2b59ff;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>Memorial Descritivo – Projeto de Incêndio</h1>
+  <!--
+    CONTAINER PRINCIPAL
+    Centraliza o conteúdo e limita a largura
+  -->
+  <div class="container">
 
-<div class="container">
+    <!-- Título -->
+    <h1>Memoriais Técnicos</h1>
 
-  <!-- FORMULÁRIO -->
-  <div class="box">
-    <h3>Dados do Projeto</h3>
-
-    <label>Razão Social
-      <input id="razao_social">
-    </label>
-
-    <label>CNPJ
-      <input id="cnpj">
-    </label>
-
-    <label>Atividade Econômica
-      <input id="atividade">
-    </label>
-
-    <label>Logradouro
-      <input id="logradouro">
-    </label>
-
-    <label>Número
-      <input id="numero">
-    </label>
-
-    <label>Bairro
-      <input id="bairro">
-    </label>
-
-    <label>Município
-      <input id="municipio">
-    </label>
-
-    <label>UF
-      <input id="uf" maxlength="2">
-    </label>
-
-    <label>CEP
-      <input id="cep">
-    </label>
-
-    <label>Em atividade?
-      <select id="em_atividade">
-        <option value="false">Não</option>
-        <option value="true">Sim</option>
-      </select>
-    </label>
-
-    <label>Ano previsto
-      <input id="ano" type="number">
-    </label>
-
-    <button onclick="gerarPDF()">Gerar PDF Oficial</button>
-    <div id="erros" class="error"></div>
-  </div>
-
-  <!-- DOCUMENTO -->
-  <div class="box">
-    <div id="pagina-a4">
-      <div class="titulo">MEMORIAL DESCRITIVO</div>
-
-      <table>
-        <tr><th colspan="6">1. IDENTIFICAÇÃO DA EDIFICAÇÃO</th></tr>
-
-        <tr>
-          <td class="rotulo">1.1</td>
-          <td class="rotulo">Razão Social:</td>
-          <td class="valor" colspan="2" id="pdf_razao"></td>
-          <td class="rotulo">CNPJ:</td>
-          <td class="valor" id="pdf_cnpj"></td>
-        </tr>
-
-        <tr>
-          <td class="rotulo">1.3</td>
-          <td class="rotulo">Atividade:</td>
-          <td class="valor" colspan="4" id="pdf_atividade"></td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td class="rotulo">Endereço:</td>
-          <td class="valor" colspan="4" id="pdf_endereco"></td>
-        </tr>
-
-        <tr>
-          <td class="rotulo">1.6</td>
-          <td class="rotulo">Em atividade?</td>
-          <td class="valor" colspan="2" id="pdf_status"></td>
-          <td class="rotulo">Ano:</td>
-          <td class="valor" id="pdf_ano"></td>
-        </tr>
-      </table>
+    <!-- Subtítulo explicativo -->
+    <div class="subtitle">
+      Sistema de elaboração de memoriais – Projeto de Prevenção e Combate a Incêndio
     </div>
+
+    <!--
+      MENU DE MEMORIAIS
+      Cada item leva para um HTML específico
+    -->
+    <div class="menu">
+
+      <!-- Memorial Descritivo Geral -->
+      <a href="memorial/memorial-descritivo.html">
+        Memorial Descritivo Geral
+      </a>
+
+      <!-- Memorial de Cálculo de Hidrantes -->
+      <a href="memorial/memorial-hidrantes.html">
+        Memorial de Cálculo de Hidrantes
+      </a>
+
+      <!-- Memorial de Compartimentação -->
+      <a href="memorial/memorial-compartimentacao.html">
+        Memorial de Compartimentação
+      </a>
+
+      <!-- Memorial de Isolamento de Risco -->
+      <a href="memorial/memorial-isolamento-risco.html">
+        Memorial de Isolamento de Risco
+      </a>
+
+      <!-- Memorial de Segurança Estrutural Contra Incêndio -->
+      <a href="memorial/memorial-seguranca-estrutural.html">
+        Memorial de Segurança Estrutural Contra Incêndio
+      </a>
+
+      <!-- Memorial de Cálculo de Carga de Incêndio -->
+      <a href="memorial/memorial-carga-incendio.html">
+        Memorial de Cálculo de Carga de Incêndio
+      </a>
+
+      <!-- Memorial de Brigadas de Incêndio -->
+      <a href="memorial/memorial-brigada.html">
+        Memorial de Brigadas de Incêndio
+      </a>
+
+      <!-- Memorial de Cálculo de Pressurização de Escadas -->
+      <a href="memorial/memorial-pressurizacao-escadas.html">
+        Memorial de Cálculo de Pressurização de Escadas
+      </a>
+
+      <!-- Memorial de Chuveiros Automáticos -->
+      <a href="memorial/memorial-chuveiros.html">
+        Memorial de Chuveiros Automáticos
+      </a>
+
+      <!-- Memorial de Elevador de Emergência -->
+      <a href="memorial/memorial-elevador-emergencia.html">
+        Memorial de Elevador de Emergência
+      </a>
+
+      <!-- Memorial de LGE -->
+      <a href="memorial/memorial-lge.html">
+        Memorial de LGE
+      </a>
+
+      <!-- Memorial de GLP -->
+      <a href="memorial/memorial-glp.html">
+        Memorial de GLP
+      </a>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+      Sistema de Memoriais Técnicos – Projeto de Incêndio
+    </footer>
+
   </div>
-
-</div>
-
-<script src="js/app.js"></script>
-<script src="js/pdf.js"></script>
 
 </body>
 </html>
