@@ -1,19 +1,267 @@
-{
-  "identificacao": {
-    "razao_social": "",
-    "cnpj": "",
-    "atividade": "",
-    "endereco": {
-      "logradouro": "",
-      "numero": "",
-      "bairro": "",
-      "municipio": "",
-      "uf": "",
-      "cep": ""
-    },
-    "situacao": {
-      "em_atividade": false,
-      "ano": ""
-    }
+/* =========================================================
+   BASE.CSS
+   Estilos BASE do formulário responsivo
+   (sem A4, sem PDF, só organização visual)
+   ========================================================= */
+
+/* RESET SIMPLES */
+* { box-sizing: border-box; }
+
+/* BODY */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 16px;
+  line-height: 1.2;
+}
+
+/* MAIN */
+main {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* FIELDSET */
+fieldset {
+  margin: 16px 0;
+  padding: 12px;
+}
+
+/* LEGEND (centralização correta) */
+legend {
+  padding: 0 10px;        /* espaço entre o texto e a linha */
+  font-weight: 700;
+  text-align: center;     /* centraliza o conteúdo dentro do “tamanho do texto” */
+  display: table;         /* faz o legend ter largura do conteúdo */
+  margin: 0 auto;         /* centraliza o legend dentro do fieldset */
+}
+
+
+/* LINHAS DO FORMULÁRIO */
+.form-row {
+  display: grid;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+/* CAMPOS DO FORMULÁRIO (label padrão: em cima do input) */
+.form-field label {
+  display: block;         /* ✅ mantém padrão de formulário */
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* INPUTS */
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* GRIDS */
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: 2fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+/* RESPONSIVIDADE (celular) */
+@media (max-width: 720px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* TEXTOS AUXILIARES */
+small {
+  display: block;
+  margin-top: 6px;
+}
+
+/* =========================================================
+   CHECKBOXES “GENÉRICOS” (somente quando você usar chkline)
+   ========================================================= */
+
+/* ITEM 4 – TIPO DE SERVIÇO (layout “grade”) */
+.servico-grid {
+  display: grid;
+  gap: 12px;
+}
+
+/* 2 opções lado a lado */
+.servico-opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Checkbox + texto com coluna fixa do checkbox */
+.chkline {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: start;
+  column-gap: 10px;
+}
+
+/* Checkbox visual */
+.chkline input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0 0;
+}
+
+/* Texto das opções */
+.chkline .txt {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Linha Ampliação (esquerda texto, direita campo) */
+.servico-ampliacao {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Caixa de “informações complementares” */
+.box-comp {
+  border: 1px solid #bdbdbd;
+  padding: 12px;
+}
+
+/* Centraliza legend somente do box interno */
+.box-comp > legend {
+  text-align: center;
+  width: 100%;
+}
+
+/* 3 campos na mesma faixa */
+.comp-areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+/* RESPONSIVIDADE do Item 4 (tablet/celular) */
+@media (max-width: 900px) {
+  .servico-opcoes {
+    grid-template-columns: 1fr;  /* empilha as 2 opções */
+  }
+
+  .servico-ampliacao {
+    grid-template-columns: 1fr;  /* campo desce */
+  }
+
+  .comp-areas {
+    grid-template-columns: 1fr;  /* empilha as 3 áreas */
+  }
+}
+
+/* ---------------------------------------------------------
+   Spacer do Item 4.2 (Ampliação):
+   ocupa espaço equivalente ao label do campo da direita,
+   mas fica invisível
+   --------------------------------------------------------- */
+.ampl-label-spacer {
+  visibility: hidden;   /* aparece? não. ocupa espaço? sim. */
+  margin-bottom: 6px;   /* igual ao margin do label padrão */
+  line-height: 1.35;    /* combina com o texto das opções */
+}
+
+/* =========================================================
+   ITEM 4 – TIPO DE SERVIÇO (PACOTE ISOLADO)
+   Prefixo: md-servico
+   Não interfere em labels/inputs do restante do formulário
+   ========================================================= */
+
+/* Contêiner do item 4 */
+.md-servico__grid {
+  display: grid;
+  gap: 12px;
+}
+
+/* 4.1 Opções principais: 2 colunas no desktop */
+.md-servico__opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Checkbox + texto em “coluna fixa + texto flexível”
+   (fica parecido com a coluna do quadradinho no formulário oficial) */
+.md-servico__chkline {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  column-gap: 10px;
+  align-items: start;
+
+  /* aparência */
+  font-weight: 600;
+  line-height: 1.35;
+
+  /* remove comportamento padrão de label bloco/inline em alguns browsers */
+  cursor: pointer;
+}
+
+/* Checkbox mais “quadrado” e consistente */
+.md-servico__chkline input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0 0;
+}
+
+/* Texto do checkbox */
+.md-servico__txt {
+  display: inline-block;
+}
+
+/* 4.2 Ampliação: duas colunas (texto à esquerda, campo à direita) */
+.md-servico__ampliacao {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Spacer invisível para alinhar "Ampliação de área" com "Área ampliada" */
+.md-servico__label-spacer {
+  display: block;
+  visibility: hidden;   /* não aparece, mas ocupa espaço */
+  margin-bottom: 6px;   /* igual ao margin do label padrão (.form-field label) */
+  line-height: 1.35;
+}
+
+/* Caixa de “Informações complementares” */
+.md-servico__box-comp {
+  border: 1px solid #bdbdbd;
+  padding: 12px;
+}
+
+/* Centraliza apenas o legend interno desta caixa */
+.md-servico__box-comp > legend {
+  display: table;
+  margin: 0 auto;
+  padding: 0 10px;
+  text-align: center;
+}
+
+/* 3 campos na mesma faixa */
+.md-servico__comp-areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+/* Responsivo: tablet/celular */
+@media (max-width: 900px) {
+  .md-servico__opcoes {
+    grid-template-columns: 1fr;
+  }
+
+  .md-servico__ampliacao {
+    grid-template-columns: 1fr;
+  }
+
+  .md-servico__comp-areas {
+    grid-template-columns: 1fr;
   }
 }
