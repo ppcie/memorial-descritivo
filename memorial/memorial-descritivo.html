@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <!-- Responsivo nativo: faz o layout se adaptar ao celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memorial Descritivo Geral</title>
+</head>
+
+<body>
+
+  <!-- Link de retorno ao menu (index está na raiz; este arquivo está em /memorial) -->
+  <p><a href="../index.html">← Voltar ao menu</a></p>
+
+  <header>
+    <h1>Memorial Descritivo Geral</h1>
+    <p>
+      Preenchimento responsivo (sem CSS por enquanto). Os campos obrigatórios estão marcados pelo navegador.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- FORMULÁRIO PRINCIPAL -->
+    <form id="form-memorial" autocomplete="on">
+
+      <!-- =========================
+           1. IDENTIFICAÇÃO DA EDIFICAÇÃO
+           ========================= -->
+      <fieldset>
+        <legend><strong>1. Identificação da edificação</strong></legend>
+
+        <p>
+          <label for="razao_social"><strong>1.1 Razão Social</strong></label><br />
+          <input id="razao_social" name="razao_social" type="text" required
+                 placeholder="Ex.: INCORPORADORA RIBEIRO ALVES LTDA ME" />
+        </p>
+
+        <p>
+          <strong>1.1 CNPJ</strong><br />
+
+          <!--
+            Regra do seu exemplo:
+            - se estiver "em construção" e sem CNPJ, você marca a opção abaixo e não preenche CNPJ.
+            - sem JS ainda: vamos depender da lógica do usuário + validação simples.
+            Depois a gente automatiza isso via JS (CNPJ obrigatório quando NÃO estiver em construção).
+          -->
+          <label>
+            <input type="checkbox" id="sem_cnpj" name="sem_cnpj" />
+            Estabelecimento “em construção” / sem CNPJ
+          </label><br /><br />
+
+          <label for="cnpj">CNPJ (somente números ou formatado)</label><br />
+          <input id="cnpj" name="cnpj" type="text"
+                 inputmode="numeric"
+                 placeholder="00.000.000/0001-00"
+                 pattern="(\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2})|(\d{14})" />
+          <small>Formato aceito: 00.000.000/0001-00 ou 14 dígitos.</small>
+        </p>
+
+        <p>
+          <label for="nome_fantasia"><strong>1.2 Nome Fantasia</strong></label><br />
+          <input id="nome_fantasia" name="nome_fantasia" type="text"
+                 placeholder="Ex.: Loja XPTO (ou OBS...)" />
+        </p>
+
+        <p>
+          <label for="atividade"><strong>1.3 Atividade Econômica</strong></label><br />
+          <input id="atividade" name="atividade" type="text" required
+                 placeholder="Ex.: Comercial varejista (produtos têxteis)" />
+        </p>
+
+        <p>
+          <label for="cnae"><strong>1.3 CNAE</strong></label><br />
+          <input id="cnae" name="cnae" type="text"
+                 placeholder="Ex.: 4781-4/00 (opcional)" />
+        </p>
+
+        <p>
+          <label for="endereco"><strong>Endereço</strong></label><br />
+          <input id="endereco" name="endereco" type="text" required
+                 placeholder="Rua/Av, logradouro" />
+        </p>
+
+        <p>
+          <label for="numero"><strong>Nº</strong></label><br />
+          <input id="numero" name="numero" type="text" required
+                 placeholder="Ex.: 331" />
+        </p>
+
+        <p>
+          <label for="complemento"><strong>1.4 Complemento</strong></label><br />
+          <input id="complemento" name="complemento" type="text"
+                 placeholder="Apto, sala, lote, etc. (se houver)" />
+        </p>
+
+        <p>
+          <label for="cep"><strong>CEP</strong></label><br />
+          <input id="cep" name="cep" type="text" inputmode="numeric"
+                 placeholder="68660-000"
+                 pattern="(\d{5}\-\d{3})|(\d{8})" />
+        </p>
+
+        <p>
+          <label for="bairro"><strong>Bairro</strong></label><br />
+          <input id="bairro" name="bairro" type="text" required placeholder="Ex.: Centro" />
+        </p>
+
+        <p>
+          <label for="municipio"><strong>Município</strong></label><br />
+          <input id="municipio" name="municipio" type="text" required placeholder="Ex.: São Miguel do Guamá - PA" />
+        </p>
+
+        <p>
+          <label for="email"><strong>1.5 E-mail</strong></label><br />
+          <input id="email" name="email" type="email" placeholder="exemplo@dominio.com" />
+        </p>
+
+        <p>
+          <label for="fone"><strong>Fone</strong></label><br />
+          <input id="fone" name="fone" type="tel" inputmode="tel" placeholder="(91) 0000-0000" />
+        </p>
+
+        <p>
+          <label for="cel"><strong>Cel</strong></label><br />
+          <input id="cel" name="cel" type="tel" inputmode="tel" placeholder="(91) 90000-0000" />
+        </p>
+
+        <fieldset>
+          <legend><strong>1.6 Estabelecimento em atividade?</strong></legend>
+
+          <label>
+            <input type="radio" name="em_atividade" value="sim" required />
+            Sim
+          </label><br />
+
+          <label>
+            <input type="radio" name="em_atividade" value="nao" />
+            Não
+          </label><br /><br />
+
+          <label for="data_inicio">
+            Data estimada para iniciar atividade (se “Não”)
+          </label><br />
+          <input id="data_inicio" name="data_inicio" type="text" placeholder="Ex.: 2026" />
+        </fieldset>
+
+      </fieldset>
+
+      <!-- =========================
+           2. IDENTIFICAÇÃO DO PROPRIETÁRIO / RESPONSÁVEL LEGAL
+           ========================= -->
+      <fieldset>
+        <legend><strong>2. Identificação do proprietário ou responsável legal pelo uso</strong></legend>
+
+        <p>
+          <label for="prop_nome"><strong>2.1 Nome Completo</strong></label><br />
+          <input id="prop_nome" name="prop_nome" type="text" required />
+        </p>
+
+        <p>
+          <label for="prop_rg"><strong>RG</strong></label><br />
+          <input id="prop_rg" name="prop_rg" type="text" />
+        </p>
+
+        <p>
+          <label for="prop_email"><strong>2.2 E-mail</strong></label><br />
+          <input id="prop_email" name="prop_email" type="email" />
+        </p>
+
+        <p>
+          <label for="prop_fone"><strong>Fone</strong></label><br />
+          <input id="prop_fone" name="prop_fone" type="tel" />
+        </p>
+
+        <p>
+          <label for="prop_cel"><strong>Cel</strong></label><br />
+          <input id="prop_cel" name="prop_cel" type="tel" />
+        </p>
+      </fieldset>
+
+      <!-- =========================
+           3. IDENTIFICAÇÃO DO RESPONSÁVEL TÉCNICO
+           ========================= -->
+      <fieldset>
+        <legend><strong>3. Identificação do responsável técnico deste memorial</strong></legend>
+
+        <p>
+          <label for="rt_nome"><strong>3.1 Nome Completo</strong></label><br />
+          <input id="rt_nome" name="rt_nome" type="text" required />
+        </p>
+
+        <p>
+          <label for="rt_registro"><strong>Registro CREA/CAU</strong></label><br />
+          <input id="rt_registro" name="rt_registro" type="text" required placeholder="Ex.: CREA-PA 0000000000" />
+        </p>
+
+        <p>
+          <label for="rt_email"><strong>3.3 E-mail</strong></label><br />
+          <input id="rt_email" name="rt_email" type="email" />
+        </p>
+
+        <p>
+          <label for="rt_fone"><strong>Fone</strong></label><br />
+          <input id="rt_fone" name="rt_fone" type="tel" />
+        </p>
+
+        <p>
+          <label for="rt_cel"><strong>Cel</strong></label><br />
+          <input id="rt_cel" name="rt_cel" type="tel" />
+        </p>
+      </fieldset>
+
+      <!-- =========================
+           4. TIPO DE SERVIÇO
+           ========================= -->
+      <fieldset>
+        <legend><strong>4. Tipo de serviço</strong></legend>
+
+        <p>
+          <label>
+            <input type="checkbox" name="servico" value="analise_projeto_tecnico" />
+            Análise de Projeto Técnico
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input type="checkbox" name="servico" value="analise_temporaria" />
+            Análise de Projeto Técnico para Instalação e Ocupação Temporária
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input type="checkbox" name="servico" value="ampliacao" />
+            Ampliação de área (m²)
+          </label><br />
+          <input type="number" name="ampliacao_area" min="0" step="0.01" placeholder="0,00" />
+        </p>
+
+        <p>
+          <label>
+            <input type="checkbox" name="servico" value="modificacao" />
+            Modificação/Substituição de projeto
+          </label>
+        </p>
+
+        <details>
+          <summary><strong>Observações (documentos/condições)</strong></summary>
+          <p>
+            Anexar documento explicando as alterações e o protocolo da aprovação anterior (quando aplicável).
+          </p>
+          <p>
+            Área anteriormente aprovada (m²): <input type="number" name="area_anterior" min="0" step="0.01" />
+          </p>
+          <p>
+            Área total (m²) (ampliada + anterior): <input type="number" name="area_total_servico" min="0" step="0.01" />
+          </p>
+        </details>
+      </fieldset>
+
+      <!-- =========================
+           5. CARACTERÍSTICAS DA EDIFICAÇÃO (começo)
+           ========================= -->
+      <fieldset>
+        <legend><strong>5. Características da edificação</strong></legend>
+
+        <fieldset>
+          <legend><strong>5.1 Edificação existente anterior ao regulamento?</strong></legend>
+          <label><input type="radio" name="edif_anterior" value="nao" required /> Não</label><br />
+          <label><input type="radio" name="edif_anterior" value="sim" /> Sim</label>
+          <p><small>Se “Sim”, anexar documentação oficial comprovando que é anterior ao regulamento em vigor.</small></p>
+        </fieldset>
+
+        <p>
+          <label for="area_total"><strong>5.2 Área total da edificação (m²)</strong></label><br />
+          <input id="area_total" name="area_total" type="number" min="0" step="0.01" required />
+        </p>
+
+        <p>
+          <label for="area_risco"><strong>5.2 Área utilizável/risco (m²)</strong></label><br />
+          <input id="area_risco" name="area_risco" type="number" min="0" step="0.01" />
+        </p>
+
+        <p>
+          <label for="carga_incendio"><strong>5.2 Carga incêndio (MJ/m²)</strong></label><br />
+          <input id="carga_incendio" name="carga_incendio" type="number" min="0" step="0.01" />
+        </p>
+
+        <p>
+          <label for="altura_edif"><strong>5.5 Altura da edificação (m)</strong></label><br />
+          <input id="altura_edif" name="altura_edif" type="number" min="0" step="0.01" required />
+        </p>
+
+        <p>
+          <label for="pavimentos"><strong>5.5 Quantidade de pavimentos</strong></label><br />
+          <input id="pavimentos" name="pavimentos" type="number" min="0" step="1" />
+        </p>
+
+        <fieldset>
+          <legend><strong>5.6 Possui subsolo?</strong></legend>
+          <label><input type="radio" name="tem_subsolo" value="nao" required /> Não</label><br />
+          <label><input type="radio" name="tem_subsolo" value="sim" /> Sim</label><br /><br />
+          <label for="subsolo_qtd">Quantidade de pavimentos de subsolo</label><br />
+          <input id="subsolo_qtd" name="subsolo_qtd" type="number" min="0" step="1" />
+        </fieldset>
+
+        <fieldset>
+          <legend><strong>5.7 Considerou isolamento de risco?</strong></legend>
+          <label><input type="radio" name="isolamento_risco" value="nao" required /> Não</label><br />
+          <label><input type="radio" name="isolamento_risco" value="sim" /> Sim</label>
+          <p><small>Se “Sim”, anexar memorial de isolamento de risco (modelo CBMPA).</small></p>
+        </fieldset>
+
+        <p>
+          <label for="tabela_it"><strong>5.8 Tabela utilizada (IT/Regulamento)</strong></label><br />
+          <input id="tabela_it" name="tabela_it" type="text" placeholder="Ex.: IT01 Parte 1 / Tabela X" />
+        </p>
+
+        <fieldset>
+          <legend><strong>5.9 Instalações sujeitas a normas específicas</strong></legend>
+
+          <label><input type="checkbox" name="inst_especificas" value="caldeira" /> Caldeira</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="subestacao" /> Subestação (ou similar)</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="gerador" /> Gerador</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="glp" /> Central de GLP</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="galeria" /> Galeria de transmissão</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="inflamaveis" /> Armazenamento de inflamáveis/combustíveis</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="perigosos" /> Armazenamento de produtos perigosos e similares</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="elevador_emerg" /> Elevador de Emergência</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="incinerador" /> Incinerador</label><br />
+          <label><input type="checkbox" name="inst_especificas" value="explosivo" /> Explosivo</label><br />
+
+          <p>
+            <label for="inst_outros">Outros (detalhar)</label><br />
+            <input id="inst_outros" name="inst_outros" type="text" />
+          </p>
+
+          <details>
+            <summary><strong>Nota Geral</strong></summary>
+            <ul>
+              <li>As instalações acima devem ser plotadas no projeto, obedecendo aos critérios de segurança das respectivas normas.</li>
+              <li>Para Central de GLP e Elevador de Emergência, pode ser exigido memorial específico (modelo CBMPA).</li>
+            </ul>
+          </details>
+
+        </fieldset>
+      </fieldset>
+
+      <!-- AÇÕES -->
+      <fieldset>
+        <legend><strong>Finalização</strong></legend>
+
+        <p>
+          <button type="submit">Salvar/Validar</button>
+          <button type="reset">Limpar</button>
+        </p>
+
+        <p>
+          <small>
+            Obs.: Por enquanto o botão “Salvar/Validar” só dispara a validação nativa do navegador.
+            Depois a gente adiciona: JSON, regras condicionais (CNPJ x “em construção”), geração de PDF, etc.
+          </small>
+        </p>
+      </fieldset>
+
+    </form>
+
+  </main>
+
+  <footer>
+    <hr />
+    <p><small>Memorial Descritivo (versão responsiva em HTML puro).</small></p>
+  </footer>
+
+</body>
+</html>
